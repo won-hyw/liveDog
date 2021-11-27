@@ -1,6 +1,6 @@
 # [Python pygame] Live Dog : 리브도그
 # 실행 파일 game.py
-import pygame
+import pygame, sys
 from character import *
 
 SCREEN_SIZE = (960, 640)
@@ -28,25 +28,30 @@ class Game:
 
         # 리소스 불러오기
         # SpriteSheet(filename, width, height, max_row, max_col, max_index)
-        self.spriteSheet_player = SpriteSheet('image/dog.png',)
+        self.spriteSheet_player = SpriteSheet('dog.png', 32, 32, 16, 16, 11)
 
-        self.spr_player = {} # 플레이어 스프라이트 세트
-        self.spr_player['stay']
-        self.spr_player['run']
-        self.spr_player['jump']
+        # 플레이어 스프라이트 세트
+        self.spr_player = {}
+        self.spr_player['sit'] = createSpriteSet(self.spriteSheet_player, [10])
+        self.spr_player['stay'] = createSpriteSet(self.spriteSheet_player, [0])
+        self.spr_player['run'] = createSpriteSet(self.spriteSheet_player, 1, 4)
+        self.spr_player['jump'] = createSpriteSet(self.spriteSheet_player, [5, 6, 7, 8, 9])
 
-        # 이벤트 루프
-        self.running = True
-        while self.running:  # 게임이 진행 중인가?
-            for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
-                if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
-                    self.running = False  # 게임이 진행중이 아님
-        pygame.quit()  # pygame 종료
-
-        # self.run()
+        self.run()
 
     def run(self):
-        pass
+        # 이벤트 루프
+        while True:  # 게임이 진행 중인가?
+            self.screen.blit(self.spriteSheet_player.spr[0], (SCREEN_SIZE[0] / 2, SCREEN_SIZE[1] / 2)) # 캐릭터 화면에 그리기
+
+            for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
+                if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
+                    pygame.quit()
+                    sys.exit()
+            pygame.display.update()
+            self.clock.tick(60)
+
+        pygame.quit()  # pygame 종료
 
 
 if __name__ == "__main__":
