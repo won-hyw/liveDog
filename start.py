@@ -1,17 +1,9 @@
 # [Python pygame] Live Dog : 리브도그
 # 실행 파일 start.py
-import pygame
-import time
-import sys
 from datafile import *
 import pygame.mixer
-
 from game import Game
 
-SCREEN_SIZE = (960, 640)
-screen = pygame.display.set_mode(SCREEN_SIZE, 0, 32)
-
-move = False
 
 # 메인 클래스
 class Main:
@@ -32,18 +24,6 @@ class Main:
         # pygame screen 설정
         self.screen_scaled = pygame.Surface((SCREEN_SIZE[0] / 4, SCREEN_SIZE[1] / 4))
 
-        self.gameScore = 0
-
-        # 리소스 불러오기
-        # SpriteSheet(filename, width, height, max_row, max_col, max_index)
-        self.spriteSheet_player = SpriteSheet('dog.png', 32, 32, 4, 4, 11)
-
-        # 플레이어 스프라이트 세트
-        self.spr_player = {}
-        self.spr_player['run'] = createSpriteSet(self.spriteSheet_player, 0, 3)
-        self.spr_player['jump'] = createSpriteSet(self.spriteSheet_player, 3, 9)
-        self.spr_player['stay'] = createSpriteSet(self.spriteSheet_player, [10])
-
         # 게임 시작 화면
         self.background = pygame.image.load(os.path.join(DIR_IMAGE, 'background.gif'))
         self.button_image = pygame.image.load(os.path.join(DIR_IMAGE,'game_start_button.png'))
@@ -57,7 +37,6 @@ class Main:
 
     def run(self):
         # 이벤트 루프
-
         while True:  # 게임이 진행 중인가?
             screen.blit(self.background, (0, 0))  # 배경화면 설정
             startButton = Button(self.button_image, 345, 445, 275, 154)
@@ -67,8 +46,7 @@ class Main:
                 if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
                     pygame.quit()
                     exit(0)
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    print("화면전환")
+                if event.type == pygame.MOUSEBUTTONDOWN: # 버튼이 눌리면 화면 전환
                     Game()
         pygame.quit()  # pygame 종료
 
