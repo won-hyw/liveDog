@@ -64,7 +64,7 @@ class Main:
             # self.screen.blit(self.button_image, (345, 445))
 
             screen.blit(self.background, (0, 0))  # 배경화면 설정
-            startButton = Button(self.button_image, 345, 445, 275, 154, startGame())
+            startButton = Button(self.button_image, 345, 445, 275, 154, None)
             pygame.display.update()
             self.clock.tick(15)
 
