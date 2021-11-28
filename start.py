@@ -6,6 +6,7 @@ import sys
 from datafile import *
 import pygame.mixer
 
+from game import Game
 
 SCREEN_SIZE = (960, 640)
 screen = pygame.display.set_mode(SCREEN_SIZE, 0, 32)
@@ -75,7 +76,7 @@ class Button:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
-            screent(image, (x, y))
+            screen.blit(image, (x, y))
         else:
             screen.blit(image, (x, y))
 
@@ -83,4 +84,4 @@ def gameStart(self):
     Game()
 
 if __name__ == "__main__":
-    Game()
+    Main()
