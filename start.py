@@ -11,6 +11,8 @@ from game import Game
 SCREEN_SIZE = (960, 640)
 screen = pygame.display.set_mode(SCREEN_SIZE, 0, 32)
 
+move = False
+
 # 메인 클래스
 class Main:
     def __init__(self):
@@ -55,24 +57,25 @@ class Main:
 
     def run(self):
         # 이벤트 루프
+
         while True:  # 게임이 진행 중인가?
+            screen.blit(self.background, (0, 0))  # 배경화면 설정
+            startButton = Button(self.button_image, 345, 445, 275, 154)
+            pygame.display.update()
+            self.clock.tick(15)
             for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
                 if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
                     pygame.quit()
-                    sys.exit()
-
-            # self.screen.blit(self.button_image, (345, 445))
-
-            screen.blit(self.background, (0, 0))  # 배경화면 설정
-            startButton = Button(self.button_image, 345, 445, 275, 154, None)
-            pygame.display.update()
-            self.clock.tick(15)
-
+                    exit(0)
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print("화면전환")
+                    Game()
         pygame.quit()  # pygame 종료
+
 
 # 버튼 클래스
 class Button:
-    def __init__(self, image, x, y, w, h, action=None):
+    def __init__(self, image, x, y, w, h):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
@@ -80,8 +83,6 @@ class Button:
         else:
             screen.blit(image, (x, y))
 
-def gameStart(self):
-    Game()
 
 if __name__ == "__main__":
     Main()
