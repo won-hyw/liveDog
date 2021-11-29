@@ -14,8 +14,6 @@ class Main:
         # window 타이틀 설정
         title = "리브도그"
         pygame.display.set_caption(title)
-        # 화면을 초당 몇 번 출력하는가, 화면 FPS 설정
-        self.clock = pygame.time.Clock()
 
         # window 아이콘 설정
         icon = pygame.image.load("image/dog_icon.png")
@@ -41,7 +39,7 @@ class Main:
             screen.blit(self.background, (0, 0))  # 배경화면 설정
             startButton = Button(self.button_image, 345, 445, 275, 154)
             pygame.display.update()
-            self.clock.tick(15)
+            clock.tick(15)
             for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
                 if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
                     pygame.quit()
