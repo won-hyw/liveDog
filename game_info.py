@@ -1,3 +1,5 @@
+import sys
+
 import pygame.image
 
 from datafile import *
@@ -47,7 +49,7 @@ class InputBox:
     def draw(self, screen):
         txt = FONT1.render('플레이어 이름을 작성해주세요', True, self.color)
         screen.blit(txt, (250, 230))
-        txt2 = FONT2.render('※ 게임을 시작하고 싶을 시 아래 방향키를 입력하세요 ※', True, (255, 255, 0))
+        txt2 = FONT2.render('※ 게임을 시작하고 싶을 시 엔터키를 입력하세요 ※', True, (255, 255, 0))
         screen.blit(txt2, (120, 400))
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         pygame.draw.rect(screen, self.color, self.rect, 2)
@@ -64,13 +66,18 @@ class Info:
         clock = pygame.time.Clock()
         box = InputBox(350, 300, 140, 50)
 
-
-        while True:
+        running = True
+        while running:
             pygame.display.update()
             clock.tick(10)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit()
+                    running = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        esc_alert = pyautogui.confirm(text='정말로 종료하시겠습니까?', title='경고', buttons=['확인', '취소'])
+                        if esc_alert == '확인':
+                            running = False
                 box.handle_event(event)
 
             box.update()
@@ -78,7 +85,8 @@ class Info:
             box.draw(SCREEN)
             pygame.display.flip()
             clock.tick(30)
-
+        pygame.quit()
+        sys.exit()
 
 if __name__ == "__main__":
     Info()

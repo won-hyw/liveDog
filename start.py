@@ -1,10 +1,11 @@
 # [Python pygame] Live Dog : 리브도그
 # 실행 파일 start.py
+import sys
 
 from datafile import *
 import pygame.mixer
 from game_info import Info
-
+import pyautogui
 
 # 메인 클래스
 class Main:
@@ -36,19 +37,26 @@ class Main:
 
     def run(self):
         # 이벤트 루프
-        while True:  # 게임이 진행 중인가?
+        running = True
+        while running:  # 게임이 진행 중인가?
+            mouse = pyautogui.position()
             SCREEN.blit(self.background, (0, 0))  # 배경화면 설정
-            startButton = Button(self.button_image, 345, 445, 275, 154)
+            start_button = Button(self.button_image, 345, 445, 275, 154)
             pygame.display.update()
             CLOCK.tick(15)
             for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
                 if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
-                    pygame.mixer.music.pause()
-                    pygame.quit()
-                    exit(0)
+                    running = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        esc_alert = pyautogui.confirm(text='정말로 종료하시겠습니까?', title='경고', buttons=['확인', '취소'])
+                        if esc_alert == '확인':
+                            running = False
                 if event.type == pygame.MOUSEBUTTONDOWN: # 버튼이 눌리면 화면 전환
-                    Info()
-
+                    if 825 < mouse[0] < 1095 and 685 < mouse[1] < 775: # 마우스의 좌표를 이용, 버튼 위치의 좌표 값 안에 있는가?
+                        Info()
+        pygame.quit()
+        sys.exit()
 
 
 if __name__ == "__main__":
