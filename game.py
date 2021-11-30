@@ -2,10 +2,10 @@ import pygame
 import sys
 from datafile import *
 
-clock = pygame.time.Clock()
 
 # 게임 클래스
 class Game:
+
     def __init__(self):
         # 초기화
         pygame.init()
@@ -28,27 +28,34 @@ class Game:
         while True:
             # 각 loop를 도는 시간
             # clock.tick()은 밀리초를 반환하므로 1000을 나누어주어 초 단위로 변경
-            mt = clock.tick(60) / 1000
-
-            for event in pygame.event.get():  # 어떤 이벤트가 발생하였는가?
-                if event.type == pygame.QUIT:  # 창이 닫히는 이벤트가 발생하였는가?
+            mt = CLOCK.tick(60) / 1000
+            # 이벤트 발생
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                         self.player.state = 1
+                        self.player.rect.y -= 3*(0.5 * self.player.m * (self.player.v * self.player.v))
+                        CLOCK.tick(15)
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                         self.player.state = 0
+                        self.player.rect.y += 3*(0.5 * self.player.m * (self.player.v * self.player.v))
 
             # all_sprites 그룹 안에 든 모든 Sprite update
             self.all_sprites.update(mt)
             # 배경화면 설정
-            screen.blit(self.background, (0, 0))
+            SCREEN.blit(self.background, (0, 0))
             # 모든 sprite 화면에 그리기
-            self.all_sprites.draw(screen)
+            self.all_sprites.draw(SCREEN)
             pygame.display.update()
 
 
 if __name__ == "__main__":
+    pygame.display.set_caption("리브도그")
+    icon = pygame.image.load(os.path.join(DIR_IMAGE, 'dog_icon.png'))
+    pygame.display.set_icon(icon)
     Game()
+
