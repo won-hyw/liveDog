@@ -63,13 +63,17 @@ class Game:
         if index == 0:
             self.gameScore += 10
         elif index == 1:
-            if self.player_life < 50:
+            if self.player_life + 5 < 150:
                 self.player_life += 5
+            elif self.player_life + 5 > 150:
+                self.player_life = 150
         elif index == 2:
             self.player_life -= 20
         elif index == 3:
-            if self.player_life < 50:
-                self.player_life += 10
+            if self.player_life + 5 < 150:
+                self.player_life += 5
+            elif self.player_life + 5 > 150:
+                self.player_life = 150
 
     def set_item(self):
         x = SCREEN_SIZE[0]
@@ -98,7 +102,7 @@ class Game:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                         self.player.state = 1
-                        self.player.rect.y -= 5*(0.5 * self.player.m * (self.player.v * self.player.v))
+                        self.player.rect.y -= 4*(0.5 * self.player.m * (self.player.v * self.player.v))
                         CLOCK.tick(60)
                     if event.key == pygame.K_ESCAPE:
                         esc_alert = pyautogui.confirm(text='정말로 종료하시겠습니까?', title='경고', buttons=['확인', '취소'])
@@ -107,12 +111,11 @@ class Game:
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                         self.player.state = 0
-                        self.player.rect.y += 5*(0.5 * self.player.m * (self.player.v * self.player.v))
-                if event.type == pygame.MOUSEBUTTONUP:
-                    print(pygame.mouse.get_pos())
+                        self.player.rect.y += 4*(0.5 * self.player.m * (self.player.v * self.player.v))
+
             # all_sprites 그룹 안에 든 모든 Sprite update
             self.all_sprites.update(mt)
-            # 배경화면 설정
+
             # 배경화면 설정
             if bg_idx == 0:
                 SCREEN.blit(self.background, (0, 0))
@@ -132,19 +135,23 @@ class Game:
             if item_x <= -20:
                 item_x, item_y, index = self.set_item()
                 item = self.items[index]
+
+            if item_x2 <= -20:
                 item_x2, item_y2, index2 = self.set_item()
                 item2 = self.items[index2]
 
             if item is not None:
                 self.draw(item, item_x, item_y)
+
+            if item2 is not None:
                 self.draw(item2, item_x2, item_y2)
 
             # 충돌 체크
             player_x_pos = 180
             player_x_pos2 = 330
             if self.player.state == 0:
-                player_y_pos = 450
-                player_y_pos2 = 630
+                player_y_pos = 440
+                player_y_pos2 = 620
                 if player_x_pos < item_x < player_x_pos2 and player_y_pos < item_y < player_y_pos2:
                     self.game_engine(index)
                     item_x, item_y, index = self.set_item()
@@ -154,8 +161,8 @@ class Game:
                     item_x2, item_y2, index2 = self.set_item()
                     item2 = self.items[index2]
             elif self.player.state == 1:
-                player_y_pos = 235
-                player_y_pos2 = 410
+                player_y_pos = 240
+                player_y_pos2 = 400
                 if player_x_pos < item_x < player_x_pos2 and player_y_pos < item_y < player_y_pos2:
                     self.game_engine(index)
                     item_x, item_y, index = self.set_item()
