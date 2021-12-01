@@ -1,7 +1,5 @@
 import sys
-
 import pygame.image
-
 from datafile import *
 from game import Game
 
@@ -10,7 +8,6 @@ COLOR_INACTIVE = pygame.Color((255, 255, 255))
 COLOR_ACTIVE = pygame.Color((255, 255, 255))
 FONT1 = pygame.font.Font('font/DungGeunMo.ttf', 32)
 FONT2 = pygame.font.Font('font/DungGeunMo.ttf', 28)
-USER_NAME = ''
 
 # 입력창 클래스
 class InputBox:
@@ -32,10 +29,9 @@ class InputBox:
         if event.type == pygame.KEYDOWN:
             if self.active:
                 if event.key == pygame.K_RETURN:
-                    USER_NAME = self.text
+                    if len(self.text) > 0:
+                        Game(self.text)
                     self.text = ''
-                    if len(USER_NAME) > 0:
-                        Game()
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
@@ -88,8 +84,4 @@ class Info:
         pygame.quit()
         sys.exit()
 
-if __name__ == "__main__":
-    Info()
-if __name__ == '__main__':
-    main()
-    pygame.quit()
+

@@ -95,7 +95,6 @@ class AnimatedSprite(pygame.sprite.Sprite):
             count = 6
             start_index = 4
 
-
         # loop 시간 더하기
         self.current_time += mt
 
@@ -112,7 +111,4 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
             if self.index >= len(self.images):
                 self.index = 0
-
-        # 좌우 위치값 변경, 이동
-        # self.rect.x += self.velocity_x
 
