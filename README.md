@@ -2,6 +2,8 @@
 
 #### 강아지의 하루를 런 게임 형식으로 표현한 게임
 
+![background](https://user-images.githubusercontent.com/80093106/144333282-a79acaa8-3b07-42b2-b118-4c7de912aa65.png)
+
 실행파일 : start.py
 
 Terminal 설치
