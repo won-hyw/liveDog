@@ -6,6 +6,7 @@ import pygame.mixer
 from game_info import Info
 import pyautogui
 
+
 # 메인 클래스
 class Main:
     def __init__(self):

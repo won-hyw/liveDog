@@ -1,6 +1,5 @@
 import pygame
 import os
-import pyautogui
 
 # 화면 사이즈 설정
 SCREEN_SIZE = (960, 640)
@@ -83,10 +82,8 @@ class AnimatedSprite(pygame.sprite.Sprite):
         self.v = VELOCITY  # 속도
         self.m = MASS  # 질량
 
-
     def update(self, mt):
         # update를 통해 캐릭터의 이미지가 계속 반복해서 나타나도록 한다.
-
         # 현재 상태에 따라 반복해줄 이미지의 index 설정과 속도
         if self.state == 0:
             count = 4           # 이미지 개수

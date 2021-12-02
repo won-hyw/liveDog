@@ -1,7 +1,7 @@
 import pygame.display
-import pygame
 from datafile import *
-import sys
+import pyautogui
+
 
 # Top3 출력 클래스
 class Top3:

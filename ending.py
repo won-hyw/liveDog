@@ -1,8 +1,4 @@
 import sys
-
-import pyautogui
-import pygame
-
 from datafile import *
 from printTop3 import Top3
 
@@ -29,7 +25,6 @@ class Ending:
     def run(self):
         running = True
         while running:
-            cursor = pyautogui.position()
             SCREEN.fill((0, 0, 0))
             font_title = pygame.font.Font('font/DungGeunMo.ttf', 40)
             font_contents = pygame.font.Font('font/DungGeunMo.ttf', 30)
@@ -49,7 +44,6 @@ class Ending:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         Top3()
-
         pygame.quit()
         sys.exit()
 

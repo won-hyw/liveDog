@@ -1,5 +1,6 @@
 import sys
 import pygame.image
+import pyautogui
 from datafile import *
 from game import Game
 
@@ -8,6 +9,7 @@ COLOR_INACTIVE = pygame.Color((255, 255, 255))
 COLOR_ACTIVE = pygame.Color((255, 255, 255))
 FONT1 = pygame.font.Font('font/DungGeunMo.ttf', 32)
 FONT2 = pygame.font.Font('font/DungGeunMo.ttf', 28)
+
 
 # 입력창 클래스
 class InputBox:

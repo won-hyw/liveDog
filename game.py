@@ -1,6 +1,4 @@
-import time
 import sys
-import pygame
 from datafile import *
 import random
 from ending import Ending
@@ -80,7 +78,6 @@ class Game:
         y = random.randrange(280, 530)
         idx = random.randint(0, 3)
         return x, y, idx
-
 
     def run(self):
         item_x, item_y, index = self.set_item()
