@@ -4,11 +4,17 @@
 
 ![background](https://user-images.githubusercontent.com/80093106/144333282-a79acaa8-3b07-42b2-b118-4c7de912aa65.png)
 
+___
+
 실행파일 : start.py
+
+___
 
 Terminal 설치
 - pip install pygame 
 - pip install pyautogui
+
+___
 
 실행방법 설명
 1. start.py를 실행시켜주세요!
